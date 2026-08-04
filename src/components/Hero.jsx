@@ -134,14 +134,14 @@ export default function Hero() {
 
           <div className="float-card glass" style={{ top: "8%", left: "-6%" }} ref={card1Ref}>
             <div style={{ fontSize: "1.6rem", fontWeight: 700, fontFamily: "'Bricolage Grotesque'" }} className="grad-text">
-              <CountUp end={42} duration={2} enableScrollSpy scrollSpyOnce />K+
+              <CountUp end={5} duration={2} enableScrollSpy scrollSpyOnce />K+
             </div>
             <div style={{ fontSize: "0.72rem", color: "#64748b" }}>Placements Made</div>
           </div>
 
           <div className="float-card glass" style={{ bottom: "6%", right: "-4%" }} ref={card2Ref}>
             <div style={{ fontSize: "1.6rem", fontWeight: 700, fontFamily: "'Bricolage Grotesque'" }} className="grad-text">
-              <CountUp end={68} duration={2} enableScrollSpy scrollSpyOnce />+
+              <CountUp end={30} duration={2} enableScrollSpy scrollSpyOnce />+
             </div>
             <div style={{ fontSize: "0.72rem", color: "#64748b" }}>Countries Served</div>
           </div>
