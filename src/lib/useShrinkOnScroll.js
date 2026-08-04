@@ -6,10 +6,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 /**
  * Attach the returned ref to a full-viewport <section>. As the section
- * scrolls up past the top of the screen, its content smoothly shrinks
- * and fades — then grows back to full size just as smoothly if the
- * person scrolls back up. Driven by scrub, so it never needs manual
- * enter/exit logic to feel reversible.
+ * scrolls into view its content grows in to full size, holds there while
+ * it's fully visible, then smoothly shrinks and fades as it scrolls back
+ * out past the top — and reverses cleanly if the person scrolls back up.
+ * Driven by scrub across the section's entire time in the viewport, so
+ * the effect is visible throughout scrolling, not just at the boundary.
  */
 export default function useShrinkOnScroll(innerSelector = ":scope > .section-inner") {
   const sectionRef = useRef(null);
@@ -20,21 +21,22 @@ export default function useShrinkOnScroll(innerSelector = ":scope > .section-inn
     const inner = section.querySelector(innerSelector) || section;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 0.4,
+        },
+      });
+
+      tl.fromTo(
         inner,
-        { scale: 1, opacity: 1 },
-        {
-          scale: 0.88,
-          opacity: 0.35,
-          ease: "none",
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "bottom top",
-            scrub: 0.4,
-          },
-        }
-      );
+        { scale: 0.9, opacity: 0.5 },
+        { scale: 1, opacity: 1, ease: "none", duration: 0.35 }
+      )
+        .to(inner, { scale: 1, opacity: 1, ease: "none", duration: 0.3 })
+        .to(inner, { scale: 0.88, opacity: 0.35, ease: "none", duration: 0.35 });
     }, sectionRef);
 
     return () => ctx.revert();
