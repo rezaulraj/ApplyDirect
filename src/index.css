@@ -117,8 +117,8 @@ header {
   left: 50%;
   transform: translateX(-50%);
   z-index: 200;
-  width: calc(100% - 48px);
-  max-width: 1200px;
+  width: calc(100% - 18px);
+  max-width: 1300px;
 }
 
 .navbar {
